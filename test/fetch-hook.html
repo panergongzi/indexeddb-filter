@@ -1,0 +1,79 @@
+<!--
+ * @Author: pwz
+   测试拦截ajax请求
+ * @Date: 2020-09-24 22:00:51
+ * @LastEditors: pwz
+ * @LastEditTime: 2020-10-14 16:34:45
+ * @FilePath: \indexeddb-filter\test\fetch-hook.html
+-->
+<!-- <script defer async>
+    console.time("time")
+    for (var i = 0; i < 10000000; i++) {
+        document.querySelector("p")
+    }
+    console.timeEnd("time")
+</script> -->
+<!-- <script src="./q.js"></script> -->
+
+<body>
+    <p>页面出来拉</p>
+</body>
+<!-- <script src="./q.js"></script>  -->
+
+
+<script src="jq.js"></script>
+<script src="../dist/indexed-filter.js"></script>
+<script>
+
+    if (window.indexedFilter) {
+        //全部拦截，包括ajax，fetch发送的请求
+        new window.indexedFilter.FetchHook({
+            filter: {//"json"表示建表名称，"/tileset/country_index/cesium3dtiles"表示需要拦截的请求的公共部分
+                "json": ["localhost:8077/Tileset"],
+                "21187": ["/21187"]
+                // "Zoom": ["/Zoom/t9n/"]
+                //"SceneServer": ["http://192.168.3.251/server/rest/services/Hosted/TianheBuildings_A/SceneServer"]
+            },
+        });
+        //只拦截ajax请求
+        // new window.indexedFilter.AjaxHook({
+        //     filter: {//"json"表示建表名称，"/tileset/country_index/cesium3dtiles"表示需要拦截的请求的公共部分
+        //         "json": ["localhost:8077/Tileset"],
+        //         "SceneServer": ["http://192.168.3.251/server/rest/services/Hosted/TianheBuildings_A/SceneServer"]
+        //     },
+        // });
+        //只拦截fetch请求
+        // new window.indexedFilter.FetchHook({
+        //     filter: {//"json"表示建表名称，"/tileset/country_index/cesium3dtiles"表示需要拦截的请求的公共部分
+        //         "json": ["localhost:8077/Tileset"],
+        //         "SceneServer": ["http://192.168.3.251/server/rest/services/Hosted/TianheBuildings_A/SceneServer"]
+        //     },
+        // });
+    }
+    //测试地址
+    let textUrl = "https://js.arcgis.com/4.17/esri/widgets/Zoom/t9n/Zoom_zh-CN.json";
+    let uri1 = 'http://localhost:8077/Tileset/tileset.json';
+    let textYrl2 = "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/SRTM_Color_Index/default/31.25m/1/0/1.png"
+    let textYrl3 = "./data/21187.jpg"
+    setTimeout(() => {
+        //发送一个fetch
+        // fetch(textUrl)
+        //     .then(function (response) {
+        //         response.json().then(data => {
+        //             console.log(data);
+        //         })
+        //     })
+        //发送一个fetch 请求图片
+        fetch(textYrl3)
+            .then(function (response) {
+                response.json().then(data => {
+                   // console.log(data);
+                })
+            })
+        //发送一个ajax
+        $.get(uri1).then(da => {
+            da
+        })
+    }, 1000)
+
+</script> -->
