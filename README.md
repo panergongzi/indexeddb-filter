@@ -29,7 +29,7 @@ indexedDB-Filter插件實現原理的對ajax,fetch原生對象進行代理攔截
                 }
     
     </script>
-使用實例 es6環境下
+使用實例 es6環境下 
 <script>
 
 </script>
